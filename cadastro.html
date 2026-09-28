@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criar Conta | Make Beauty</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            color: #333;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    #ffd9e6,
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    #f7c1d5,
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff7fa,
+                    #fce3eb
+                );
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================== */
+
+        .cadastro-container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .cadastro-box {
+            width: 100%;
+
+            padding: 30px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border: 1px solid rgba(255, 255, 255, 0.8);
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 20px 50px rgba(170, 45, 90, 0.16);
+
+            animation: aparecer 0.6s ease;
+        }
+
+
+        /* =========================
+           LOGO
+        ========================== */
+
+        .logo {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f47fa5,
+                    #d6336c
+                );
+
+            color: white;
+
+            font-size: 28px;
+
+            box-shadow:
+                0 8px 20px rgba(214, 51, 108, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+
+            color: #d6336c;
+
+            font-size: 25px;
+
+            margin-bottom: 4px;
+        }
+
+        .subtitulo {
+            text-align: center;
+
+            color: #888;
+
+            font-size: 13px;
+
+            margin-bottom: 24px;
+        }
+
+
+        /* =========================
+           CAMPOS
+        ========================== */
+
+        .campo {
+            margin-bottom: 13px;
+        }
+
+        .campo label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #444;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .campo input {
+            width: 100%;
+
+            height: 43px;
+
+            padding: 0 13px;
+
+            border: 1px solid #eadce2;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: #fffafd;
+
+            color: #333;
+
+            font-size: 13px;
+
+            transition: 0.25s;
+        }
+
+        .campo input:hover {
+            border-color: #e5a6bb;
+        }
+
+        .campo input:focus {
+            border-color: #d6336c;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px rgba(214, 51, 108, 0.08);
+        }
+
+        .campo input::placeholder {
+            color: #aaa;
+        }
+
+
+        /* =========================
+           DUAS COLUNAS
+        ========================== */
+
+        .linha {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+        }
+
+
+        /* =========================
+           BOTÃO
+        ========================== */
+
+        .botao {
+            width: 100%;
+
+            height: 45px;
+
+            margin-top: 5px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e04b7d,
+                    #c92860
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 18px rgba(201, 40, 96, 0.22);
+
+            transition: 0.25s;
+        }
+
+        .botao:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 24px rgba(201, 40, 96, 0.3);
+        }
+
+        .botao:active {
+            transform: scale(0.98);
+        }
+
+
+        /* =========================
+           MENSAGEM
+        ========================== */
+
+        #mensagem {
+            margin-top: 12px;
+
+            padding: 9px;
+
+            border-radius: 9px;
+
+            text-align: center;
+
+            font-size: 12px;
+        }
+
+        #mensagem:empty {
+            display: none;
+        }
+
+        #mensagem.erro {
+            background: #ffe4e8;
+
+            color: #b4233c;
+        }
+
+        #mensagem.sucesso {
+            background: #e2f8e9;
+
+            color: #18743a;
+        }
+
+
+        /* =========================
+           LINKS
+        ========================== */
+
+        .links {
+            margin-top: 18px;
+
+            text-align: center;
+
+            color: #888;
+
+            font-size: 12px;
+        }
+
+        .links p {
+            margin-bottom: 10px;
+        }
+
+        .links a {
+            color: #d6336c;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .voltar {
+            color: #888 !important;
+
+            font-weight: normal !important;
+        }
+
+
+        /* =========================
+           ANIMAÇÃO
+        ========================== */
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(20px)
+                    scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================== */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 12px;
+            }
+
+            .cadastro-box {
+                padding: 24px 18px;
+
+                border-radius: 20px;
+            }
+
+            .linha {
+                grid-template-columns: 1fr;
+
+                gap: 0;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <main class="cadastro-container">
+
+        <div class="cadastro-box">
+
+            <!-- LOGO -->
+
+            <div class="logo">
+                💄
+            </div>
+
+            <h1>
+                Make Beauty
+            </h1>
+
+            <p class="subtitulo">
+                Crie sua conta e descubra seu estilo
+            </p>
+
+
+            <!-- FORMULÁRIO -->
+
+            <form id="cadastroForm">
+
+
+                <!-- NOME -->
+
+                <div class="campo">
+
+                    <label for="nome">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite seu nome"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="campo">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="seu@email.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CPF E SENHA -->
+
+                <div class="linha">
+
+                    <div class="campo">
+
+                        <label for="cpf">
+                            CPF
+                        </label>
+
+                        <input
+                            type="text"
+                            id="cpf"
+                            name="cpf"
+                            placeholder="000.000.000.00"
+                            maxlength="13"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="senha">
+                            Senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Mín. 6 caracteres"
+                            minlength="6"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- ENDEREÇO -->
+
+                <div class="campo">
+
+                    <label for="endereco">
+                        Endereço
+                    </label>
+
+                    <input
+                        type="text"
+                        id="endereco"
+                        name="endereco"
+                        placeholder="Rua, número, bairro e cidade"
+                        autocomplete="street-address"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONFIRMAR SENHA -->
+
+                <div class="campo">
+
+                    <label for="confirmarSenha">
+                        Confirmar senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        name="confirmarSenha"
+                        placeholder="Digite a senha novamente"
+                        minlength="6"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button
+                    type="submit"
+                    class="botao"
+                >
+                    Criar minha conta ✨
+                </button>
+
+            </form>
+
+
+            <!-- MENSAGEM -->
+
+            <div id="mensagem"></div>
+
+
+            <!-- LINKS -->
+
+            <div class="links">
+
+                <p>
+                    Já possui uma conta?
+                    <a href="login.html">
+                        Entrar
+                    </a>
+                </p>
+
+                <a
+                    href="index.html"
+                    class="voltar"
+                >
+                    ← Voltar para a loja
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        const form =
+            document.getElementById("cadastroForm");
+
+        const cpf =
+            document.getElementById("cpf");
+
+        const senha =
+            document.getElementById("senha");
+
+        const confirmarSenha =
+            document.getElementById("confirmarSenha");
+
+        const mensagem =
+            document.getElementById("mensagem");
+
+
+        // =========================
+        // FORMATAÇÃO DO CPF
+        // =========================
+
+        cpf.addEventListener("input", function () {
+
+            let valor = cpf.value;
+
+            // Aceita somente números
+            valor = valor.replace(/\D/g, "");
+
+            // Limita a 11 números
+            valor = valor.substring(0, 11);
+
+            // Formata CPF
+            if (valor.length > 9) {
+
+                valor =
+                    valor.replace(
+                        /^(\d{3})(\d{3})(\d{3})(\d{0,2}).*/,
+                        "$1.$2.$3.$4"
+                    );
+
+            } else if (valor.length > 6) {
+
+                valor =
+                    valor.replace(
+                        /^(\d{3})(\d{3})(\d{0,3}).*/,
+                        "$1.$2.$3"
+                    );
+
+            } else if (valor.length > 3) {
+
+                valor =
+                    valor.replace(
+                        /^(\d{3})(\d{0,3}).*/,
+                        "$1.$2"
+                    );
+
+            }
+
+            cpf.value = valor;
+
+        });
+
+
+        // =========================
+        // ENVIO DO FORMULÁRIO
+        // =========================
+
+        form.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            mensagem.className = "";
+
+            mensagem.textContent = "";
+
+
+            // Verificar senha
+
+            if (senha.value.length < 6) {
+
+                mensagem.textContent =
+                    "A senha precisa ter pelo menos 6 caracteres.";
+
+                mensagem.classList.add("erro");
+
+                senha.focus();
+
+                return;
+            }
+
+
+            // Verificar confirmação
+
+            if (senha.value !== confirmarSenha.value) {
+
+                mensagem.textContent =
+                    "As senhas não são iguais.";
+
+                mensagem.classList.add("erro");
+
+                confirmarSenha.focus();
+
+                return;
+            }
+
+
+            // Verificar CPF
+
+            const cpfNumeros =
+                cpf.value.replace(/\D/g, "");
+
+            if (cpfNumeros.length !== 11) {
+
+                mensagem.textContent =
+                    "Digite um CPF válido com 11 números.";
+
+                mensagem.classList.add("erro");
+
+                cpf.focus();
+
+                return;
+            }
+
+
+            // Sucesso
+
+            mensagem.textContent =
+                "Conta criada com sucesso! 💗";
+
+            mensagem.classList.add("sucesso");
+
+
+            // Limpa o formulário
+
+            form.reset();
+
+        });
+
+    </script>
+
+</body>
+
+</html>
